@@ -11,7 +11,6 @@ export const SITE: Site = {
 export const NavigationLinks: NavigationLink[] = [
     { name: 'Noticias', url: '/posts' },
     { name: 'Categorías', url: '/categories' },
-    { name: 'Nosotros', url: '/posts/about-godruoyi' },
     { name: 'Colaboradores', url: '/colaboradores' },
 ]
 
