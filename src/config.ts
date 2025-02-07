@@ -10,7 +10,8 @@ export const SITE: Site = {
 
 export const NavigationLinks: NavigationLink[] = [
     { name: 'Noticias', url: '/posts' },
-    { name: 'Categorías', url: '/categories' },
+    { name: 'Lugares', url: '/categorias/lugares' },
+    { name: 'Restaurantes', url: '/categorias/restaurantes' },
     { name: 'Colaboradores', url: '/colaboradores' },
 ]
 
