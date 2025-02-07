@@ -18,7 +18,7 @@ const { title, description = SITE.description, ogImage, lang = 'es', structuredD
 const normalizeTitle = !title ? SITE.title : `${title} | ${SITE.title}`
 ---
 
-<html lang={lang} class="scrollbar-hide lenis lenis-smooth scroll-pt-16">
+<html lang={lang}>
     <head>
         <title>{normalizeTitle}</title>
         <BaseHead
@@ -37,15 +37,6 @@ const normalizeTitle = !title ? SITE.title : `${title} | ${SITE.title}`
              document.documentElement.classList.remove('dark')
          }
          </script>
-        <script is:inline src="/vendor/lenis/lenis1.1.5.min.js"></script>
-        <script is:inline>
-        const lenis = new Lenis()
-        function raf(time) {
-            lenis.raf(time)
-            requestAnimationFrame(raf)
-        }
-        requestAnimationFrame(raf)
-        </script>
         <GoogleAnalytics />
         <UmamiAnalytics />
     </head>
