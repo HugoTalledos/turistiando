@@ -5,7 +5,6 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 import BlogInsight from '@components/blog/BlogInsight.astro'
 import HeroSection from '@components/ui/sections/HeroSection.astro'
 import FeaturesSection from '@components/ui/sections/FeaturesSection.astro'
-import HeroSectionAlt from '@components/ui/sections/HeroSectionAlt.astro'
 import blogHeroImg from '@images/home.png'
 
 const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
@@ -15,12 +14,12 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
 
 <BaseLayout title='Turistiando Sogamoso' description='¿Ya sabes que hacer hoy?'>
     <HeroSection
-        title=`Hello, <span class="text-yellow-500 dark:text-yellow-400">Godruoyi</span>`
-        subTitle="Hi, I'm Lianbo, I enjoy the process of building something using any technology stack, welcome to my blog"
-        primaryBtn="Explore Posts"
+        title=`Turistiando, <span class="text-yellow-500 dark:text-yellow-400">Sogamoso</span>`
+        subTitle="¿Ya sabes que hacer hoy? ¿No? Bueno, esta es una guía turistica de <strong>Sogamoso</strong>."
+        primaryBtn="¡Vamos!"
         primaryBtnURL="/posts"
         src={blogHeroImg}
-        alt="godruoyi's blog"
+        alt="Turistiando bienvenida"
     />
 
     <FeaturesSection />
@@ -42,10 +41,4 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
             }
         </div>
     </section>
-
-    <HeroSectionAlt
-        title="Fellow me on GitHub"
-        subTitle="I love open source and have some small tools on my GitHub. You can get me more by checking out my code"
-        url="https://github.com/godruoyi"
-    />
 </BaseLayout>
