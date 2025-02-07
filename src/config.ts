@@ -9,31 +9,10 @@ export const SITE: Site = {
 }
 
 export const NavigationLinks: NavigationLink[] = [
-    { name: 'Posts', url: '/posts' },
-    { name: 'Category', url: '/categories' },
-    { name: 'Timeline', url: '/timeline' },
-    { name: 'About', url: '/posts/about-godruoyi' },
-    { name: 'Friends', url: '/friends' },
-]
-
-export const FooterLinks = [
-    {
-        section: 'Blog',
-        links: [
-            { name: 'Posts', url: '/posts' },
-            { name: 'Timeline', url: '/timeline' },
-            { name: 'Categories', url: '/categories' },
-            { name: 'About Me', url: '/posts/about-godruoyi' },
-        ],
-    },
-    {
-        section: 'Other',
-        links: [
-            { name: 'RSS', url: '/rss.xml' },
-            { name: 'Site Map', url: '/sitemap-index.xml' },
-            { name: 'Twitter', url: 'https://x.com/godruoyi' },
-        ],
-    },
+    { name: 'Noticias', url: '/posts' },
+    { name: 'Categorías', url: '/categories' },
+    { name: 'Nosotros', url: '/posts/about-godruoyi' },
+    { name: 'Colaboradores', url: '/colaboradores' },
 ]
 
 export const Settings = {
