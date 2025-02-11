@@ -39,6 +39,8 @@
     "@types/unist": "^3.0.2",
     "astro": "^5.0.3",
     "astro-compressor": "^0.4.1",
+    "axios": "^1.7.9",
+    "log4js": "^6.9.1",
     "mdast-util-to-string": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
