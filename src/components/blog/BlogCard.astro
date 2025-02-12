@@ -1,25 +1,27 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-import Image from '@components/ui/images/Image.astro'
-import { formatDate } from '@support/time'
+import type { PostProps } from "@/api/posts/PostProps.types";
+import Image from "@components/ui/images/Image.astro";
+import { formatDate } from "@support/time";
 
-const { blog } = Astro.props
-
-interface Props {
-    blog: CollectionEntry<'posts'>
+export interface Props {
+    post: PostProps;
 }
+
+const { post } = Astro.props as Props;
 ---
 
 <a
     class="group relative block rounded-xl outline-none ring-zinc-500 transition duration-500 focus-visible:ring dark:ring-zinc-200 dark:focus:outline-none"
-    href={`/posts/${blog.slug}/`}
+    href={`/posts/${post.slug}/`}
     data-astro-prefetch="false"
 >
-    <div class="relative w-full flex-shrink-0 overflow-hidden rounded-xl before:absolute before:inset-x-0 before:z-[1] before:size-full before:bg-gradient-to-t before:from-neutral-900/[.7]">
+    <div
+        class="relative w-full flex-shrink-0 overflow-hidden rounded-xl before:absolute before:inset-x-0 before:z-[1] before:size-full before:bg-gradient-to-t before:from-neutral-900/[.7]"
+    >
         <Image
             class="w-full h-full sm:h-[220px] md:h-[240px] start-0 top-0 size-full object-cover transition duration-500 group-hover:scale-110"
-            src={blog.data.banner}
-            alt={blog.data.title}
+            src={post.images[0]}
+            alt={post.title}
             draggable="false"
             loading="eager"
             format="avif"
@@ -27,10 +29,14 @@ interface Props {
             height="460"
         />
     </div>
-    <h3 class="mt-2 text-xl font-bold text-neutral-800 group-hover:text-orange-400 dark:text-neutral-200 dark:group-hover:text-orange-300">
-        {blog.data.title}
+    <h3
+        class="mt-2 text-xl font-bold text-neutral-800 group-hover:text-orange-400 dark:text-neutral-200 dark:group-hover:text-orange-300"
+    >
+        {post.title}
     </h3>
-    <p class="mt-2 text-sm text-gray-600 dark:text-neutral-400 dark:group-hover:text-neutral-500">
-        {formatDate(blog.data.pubDate)}
+    <p
+        class="mt-2 text-sm text-gray-600 dark:text-neutral-400 dark:group-hover:text-neutral-500"
+    >
+        {formatDate(new Date(post.createdAt))}
     </p>
 </a>

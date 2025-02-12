@@ -1,9 +1,12 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro'
-import { type CollectionEntry, getCollection } from 'astro:content'
-import BlogCard from '@components/blog/BlogCard.astro'
+import { getCollection } from 'astro:content'
 import MainSection from '@components/ui/sections/MainSection.astro'
 import { SITE } from '@/config'
+import PostRepository from '@/api/posts/PostsRepository'
+import type { PostProps } from '@/api/posts/PostProps.types'
+import BlogCard from '@/components/blog/BlogCard.astro'
+
 
 export async function getStaticPaths() {
     const categories = await getCollection('categories')
@@ -14,13 +17,11 @@ export async function getStaticPaths() {
 }
 
 const { category } = Astro.props
-const URL = Astro.url.href
 
-const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
-    (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-).filter((b) => {
-    return b.data.category === category.slug
-});
+const response = await PostRepository.getPostByCategory(category.data.id, {});
+const postList: PostProps[] = Array.isArray(response) ? response : [];
+
+const URL = Astro.url.href
 ---
 
 <BaseLayout
@@ -47,7 +48,8 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
 
     <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 mb-10 2xl:max-w-full">
         <div class="grid gap-6 grid-cols-1 lg:grid-cols-3 sm:grid-cols-2">
-            {posts.map(b => <BlogCard blog={b} />)}
+            { postList.length > 0 && postList.map((post) => <BlogCard post={post} />) }
         </div>
     </section>
+    
 </BaseLayout>
