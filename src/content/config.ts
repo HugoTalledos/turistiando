@@ -1,5 +1,20 @@
 import { defineCollection, z } from 'astro:content'
 
+const products = defineCollection({
+    type: 'data',
+    schema: z.object({
+        creationDate: z.string(),
+        isDeleted: z.boolean(),
+        lastModify: z.string(),
+        productCategory: z.string(),
+        productDescription: z.string(),
+        productId: z.string(),
+        productImage: z.array(z.string().url()),
+        productName: z.string(),
+        productOrder: z.number(),
+    }),
+})
+
 const posts = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
@@ -24,12 +39,14 @@ const posts = defineCollection({
         // not use, just record this value since its from my previous blog system
         updatedDate: z.coerce.date().optional(),
         oldViewCount: z.number().optional(),
+        isOnline: z.boolean().optional(),
     }),
 })
 
 const categoryCollection = defineCollection({
     type: 'content',
     schema: () => z.object({
+        id: z.string(),
         title: z.string(),
         description: z.string(),
     }),
@@ -53,4 +70,4 @@ const friendsCollection = defineCollection({
     ),
 })
 
-export const collections = { posts, categories: categoryCollection, friends: friendsCollection }
+export const collections = { posts, categories: categoryCollection, friends: friendsCollection, products }

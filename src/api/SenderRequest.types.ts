@@ -1,7 +1,7 @@
-import type { AxiosRequestConfig } from "axios";
+import type { AxiosRequestConfig } from 'axios'
 
 interface ApiProps {
-    path: string,
+    path: string
     config?: AxiosRequestConfig<any> | undefined
 }
 
@@ -9,10 +9,10 @@ export interface PostProps extends ApiProps {
     body: object
 }
 
-export interface GetProps extends ApiProps{}
+export interface GetProps extends ApiProps {}
 
 export interface APIResponse<T> {
-    status: boolean,
-    code: string,
+    status: boolean
+    code: string
     data: T
 }

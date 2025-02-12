@@ -1,5 +1,5 @@
 export interface Page {
-    limit: number,
+    limit: number
     lastItem?: string
     orderKey?: string
     order?: string

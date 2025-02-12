@@ -1,0 +1,32 @@
+---
+import Bookmark from '../ui/buttons/Bookmark.astro'
+import SocialShare from '../ui/buttons/SocialShare.astro'
+
+interface Props {
+    likes: number
+    title: string
+    schedules?: string[]
+}
+
+
+const { likes, title, schedules = ['Lunes > 9:00am - 12:00pm', 'Lunes > 9:00am - 12:00pm', 'Lunes > 9:00am - 12:00pm', 'Lunes > 9:00am - 12:00pm', 'Lunes > 9:00am - 12:00pm'] } = Astro.props
+const date = new Date()
+const day = date.getDay()
+const currentSchedule = schedules[day - 1].split('>')[1];
+---
+
+<aside class="flex-none sticky top-[120px] h-full">
+    <details open class="cursor-pointer border border-gray-300 rounded-md p-2 w-full">
+        <summary>{`Horario ${currentSchedule}`}</summary>
+        { schedules.map(schedule => <p class="py-3">{ schedule.replace('>', '') }</p>) }
+    </details>
+    <div class="mt-10 md:mt-14 mx-auto grid max-w-screen-lg gap-y-5 sm:flex sm:items-center sm:justify-between sm:gap-y-0">
+        <div class="flex items-center justify-end gap-x-1.5">
+            <span>{ likes }</span> <Bookmark />
+            <div class="mx-3 block h-4 border-e border-neutral-400 dark:border-neutral-500"></div>
+            <div class="inline-flex">
+                <SocialShare pageTitle={title} />
+            </div>
+        </div>
+    </div>
+</aside>

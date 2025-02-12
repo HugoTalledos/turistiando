@@ -1,32 +1,32 @@
 interface ContactinfoProps {
-    key: string,
+    key: string
     value: string
 }
 
 interface ScheduleProps {
-    day: string,
-    schedule: string,
+    day: string
+    schedule: string
 }
 
 export interface PostProps {
-    categoryId: string,
+    categoryId: string
     contactInfo: Array<ContactinfoProps>
-    createdAt: string,
-    description: string,
+    createdAt: string
+    description: string
     images: Array<string>
-    isDeleted: boolean,
-    likes: number,
-    mapLink: string,
-    order: number,
-    postId: string,
-    schedule: Array<ScheduleProps>,
-    slug: string,
-    title: string,
+    isDeleted: boolean
+    likes: number
+    mapLink: string
+    order: number
+    postId: string
+    schedule: Array<ScheduleProps>
+    slug: string
+    title: string
 }
 
 export interface PostRequest {
-    limit: number,
-    lastItem: string,
-    orderKey: string | 'creationDate',
-    order: string | 'desc',
+    limit: number
+    lastItem: string
+    orderKey: string | 'creationDate'
+    order: string | 'desc'
 }

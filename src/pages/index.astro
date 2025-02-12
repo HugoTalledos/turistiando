@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
 import BaseLayout from '@layouts/BaseLayout.astro'
-import BlogInsight from '@components/blog/BlogInsight.astro'
 import HeroSection from '@components/ui/sections/HeroSection.astro'
 import FeaturesSection from '@components/ui/sections/FeaturesSection.astro'
 import blogHeroImg from '@images/home.png'
@@ -12,7 +11,7 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
 ).slice(0, 3);
 ---
 
-<BaseLayout title='Turistiando Sogamoso' description='¿Ya sabes que hacer hoy?'>
+<BaseLayout title="Turistiando Sogamoso" description="¿Ya sabes que hacer hoy?">
     <HeroSection
         title=`Turistiando, <span class="text-yellow-500 dark:text-yellow-400">Sogamoso</span>`
         subTitle="¿Ya sabes que hacer hoy? ¿No? Bueno, esta es una guía turistica de <strong>Sogamoso</strong>."
@@ -23,7 +22,7 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
     />
 
     <FeaturesSection />
-
+<!--
     <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
         <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
             <h2 class="text-3xl font-bold text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight">
@@ -40,5 +39,5 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
                 ))
             }
         </div>
-    </section>
+    </section> -->
 </BaseLayout>

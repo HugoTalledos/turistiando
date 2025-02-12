@@ -7,7 +7,6 @@ import PostRepository from '@/api/posts/PostsRepository'
 import type { PostProps } from '@/api/posts/PostProps.types'
 import BlogCard from '@/components/blog/BlogCard.astro'
 
-
 export async function getStaticPaths() {
     const categories = await getCollection('categories')
     return categories.map(category => ({
@@ -18,8 +17,8 @@ export async function getStaticPaths() {
 
 const { category } = Astro.props
 
-const response = await PostRepository.getPostByCategory(category.data.id, {});
-const postList: PostProps[] = Array.isArray(response) ? response : [];
+const response = await PostRepository.getPostByCategory(category.data.id, {})
+const postList: PostProps[] = Array.isArray(response) ? response : []
 
 const URL = Astro.url.href
 ---
@@ -48,8 +47,9 @@ const URL = Astro.url.href
 
     <section class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 mb-10 2xl:max-w-full">
         <div class="grid gap-6 grid-cols-1 lg:grid-cols-3 sm:grid-cols-2">
-            { postList.length > 0 && postList.map((post) => <BlogCard post={post} />) }
+            {
+                postList.length > 0 && postList.map(post => <BlogCard post={post} />)
+            }
         </div>
     </section>
-    
 </BaseLayout>

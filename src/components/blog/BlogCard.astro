@@ -1,10 +1,10 @@
 ---
-import type { PostProps } from "@/api/posts/PostProps.types";
-import Image from "@components/ui/images/Image.astro";
-import { formatDate } from "@support/time";
+import Image from '@components/ui/images/Image.astro'
+import { formatDate } from '@support/time'
+import type { PostProps } from '@/api/posts/PostProps.types'
 
 export interface Props {
-    post: PostProps;
+    post: PostProps
 }
 
 const { post } = Astro.props as Props;

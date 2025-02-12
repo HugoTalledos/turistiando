@@ -19,6 +19,9 @@ export default {
                 600: '#4b5563',
                 800: '#1f2937',
             },
+            green: {
+                300: '#0b6e4f',
+            },
             indigo: {
                 200: '#c7d2fe',
                 300: '#a5b4fc',
