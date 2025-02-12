@@ -1,22 +1,12 @@
 import axios, { type AxiosResponse } from 'axios';
 import type { APIResponse } from './SenderRequest.types';
 
-const {
-  REACT_APP_BACKEND,
-  REACT_APP_ACCESSTOKEN,
-  REACT_APP_SECRET,
-} = process.env;
-
 export const api = axios.create({
-  baseURL: REACT_APP_BACKEND || 'http://localhost:8081/api',
-  headers: {
-    'Content-Type': 'application/json',
-    accessToken: REACT_APP_ACCESSTOKEN,
-    secretKey: REACT_APP_SECRET,
-  },
+  baseURL: 'http://localhost:8081/api',
+  headers: { 'Content-Type': 'application/json' },
 });
 
-export const getApiURL = () => REACT_APP_BACKEND;
+export const getApiURL = () => 'http://localhost:8081/api';
 export function getResponseData<R>(response: AxiosResponse<APIResponse<R>>): APIResponse<R> {
     return response.data; // Retorna solo la parte útil de la respuesta
 }

@@ -1,15 +1,15 @@
 
+import type { Page } from '../models/Commons.types';
 import SenderRequest from '../SenderRequest';
 import type { PostProps, PostRequest } from './PostProps.types';
 
 export default class PostRepository {
-    static async getPostByCategory(request: PostRequest): Promise<PostProps[] | null> {
+    static async getPostByCategory(categoryId: string, page: Page | object): Promise<PostProps[] | null> {
       try {
         const apiResponse = await SenderRequest.post<PostProps[]>({
-            path: "/post",
-            body: request
+            path: `/post/category/${categoryId}`,
+            body: page
         });
-
         return apiResponse.data;
       } catch (e) {
         return null;

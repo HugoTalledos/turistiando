@@ -3,15 +3,25 @@ interface ContactinfoProps {
     value: string
 }
 
+interface ScheduleProps {
+    day: string,
+    schedule: string,
+}
+
 export interface PostProps {
-    id: string,
-    slug: string,
-    title: string,
+    categoryId: string,
+    contactInfo: Array<ContactinfoProps>
+    createdAt: string,
     description: string,
     images: Array<string>
+    isDeleted: boolean,
+    likes: number,
+    mapLink: string,
     order: number,
-    creationDate: string,
-    contactInfo: Array<ContactinfoProps>
+    postId: string,
+    schedule: Array<ScheduleProps>,
+    slug: string,
+    title: string,
 }
 
 export interface PostRequest {
