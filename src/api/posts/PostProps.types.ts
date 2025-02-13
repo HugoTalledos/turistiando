@@ -1,12 +1,5 @@
-interface ContactinfoProps {
-    key: string
-    value: string
-}
+import type { ContactinfoProps, ScheduleProps } from "../models/Commons.types"
 
-interface ScheduleProps {
-    day: string
-    schedule: string
-}
 
 export interface PostProps {
     categoryId: string
