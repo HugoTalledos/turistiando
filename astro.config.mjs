@@ -7,6 +7,7 @@ import partytown from '@astrojs/partytown'
 import { SITE } from './src/config.ts'
 import { remarkReadingTime } from './src/support/plugins.ts'
 import { uploadAssetsToS3 } from './src/support/uploader.ts'
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
     site: SITE.url,
@@ -47,7 +48,8 @@ export default defineConfig({
         enabled: false,
     },
     prefetch: true,
-    output: 'static',
+    output: 'server',
+    adapter: vercel(),
     build: {
         // Specifies the directory in the build output where Astro-generated assets (bundled JS and CSS for example) should live.
         // see https://docs.astro.build/en/reference/configuration-reference/#buildassets
