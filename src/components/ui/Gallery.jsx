@@ -14,7 +14,7 @@ export function ImageGallery({ imageList }) {
                 />
             </div>
             <div className="grid grid-cols-5 gap-4">
-                {imageList.map((imgelink, index) => (
+                {imageList.length > 1  && imageList.map((imgelink, index) => (
                     <div key={index}>
                         <img
                             onClick={() => setActive(imgelink)}

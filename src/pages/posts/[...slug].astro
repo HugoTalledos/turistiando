@@ -96,8 +96,8 @@ const ogImage = post?.images[0]
                             aria-current="page"
                         >
                             {
-                                post
-                                ? <span class="text-green-300">Abierto</span>
+                                post.isOpen
+                                ? <span class="text-green-300 font-bold">Abierto</span>
                                 : <span class="text-red-500 font-bold">Cerrado</span>
                             }
                         </li>
