@@ -1,13 +1,14 @@
 import { defineConfig, passthroughImageService, sharpImageService } from 'astro/config'
 import mdx from '@astrojs/mdx'
 import tailwind from '@astrojs/tailwind'
-import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import partytown from '@astrojs/partytown'
 import { SITE } from './src/config.ts'
 import { remarkReadingTime } from './src/support/plugins.ts'
 import { uploadAssetsToS3 } from './src/support/uploader.ts'
 import vercel from '@astrojs/vercel';
+
+import preact from '@astrojs/preact';
 
 export default defineConfig({
     site: SITE.url,
@@ -17,22 +18,14 @@ export default defineConfig({
         // So please delete the environment variable directly if you want to disable the image optimization service
         service: (!!import.meta.env.ASTRO_IMAGE_OPTIMIZE || !!process.env.ASTRO_IMAGE_OPTIMIZE) ? sharpImageService() : passthroughImageService(),
     },
-    integrations: [
-        partytown(),
-        mdx(),
-        sitemap(),
-        tailwind(),
-        react(),
-        (await import('@playform/compress')).default({
-            CSS: true,
-            HTML: true,
-            Image: false,
-            JavaScript: true,
-            SVG: true,
-            Logger: 2,
-        }),
-        uploadAssetsToS3(),
-    ],
+    integrations: [partytown(), mdx(), sitemap(), tailwind(), (await import('@playform/compress')).default({
+        CSS: true,
+        HTML: true,
+        Image: false,
+        JavaScript: true,
+        SVG: true,
+        Logger: 2,
+    }), uploadAssetsToS3(), preact()],
     markdown: {
         remarkPlugins: [remarkReadingTime],
         shikiConfig: {
