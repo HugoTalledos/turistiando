@@ -19,6 +19,8 @@ const { likes } = Astro.props
 </button>
 
 <script>
+import PostRepository from "@/api/posts/PostsRepository"
+
  class Bookmark {
      private static readonly BOOKMARKS_KEY = 'bookmarks'
      private bookmarkButton: Element | null

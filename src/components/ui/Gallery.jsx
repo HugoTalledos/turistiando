@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from "preact/hooks"
 
 export function ImageGallery({ imageList }) {
     const [active, setActive] = useState(imageList[0])
