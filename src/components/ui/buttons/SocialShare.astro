@@ -21,14 +21,9 @@ const socialPlatforms: SocialPlatform[] = [
         svg: 'facebook',
     },
     {
-        name: 'X',
-        url: `https://twitter.com/home/?status=${pageTitle}${Astro.url}`,
-        svg: 'x',
-    },
-    {
-        name: 'LinkedIn',
-        url: `https://www.linkedin.com/shareArticle?mini=true&url=${Astro.url}&title=${pageTitle}`,
-        svg: 'linkedIn',
+        name: 'WhatsApp',
+        url: `https://wa.me/?text=${pageTitle} ${Astro.url}`,
+        svg: 'whatsapp',
     },
 ];
 ---
@@ -56,7 +51,7 @@ const socialPlatforms: SocialPlatform[] = [
                         href={platform.url}
                     >
                         <Icon name={platform.svg} />
-                        Share on {platform.name}
+                        Compartir en {platform.name}
                     </a>
                 ))
             }
@@ -97,7 +92,7 @@ const socialPlatforms: SocialPlatform[] = [
                 >
                     <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                <span class="js-clipboard-success-text">Copy link</span>
+                <span class="js-clipboard-success-text">Copiar link</span>
             </button>
         </div>
     </div>
@@ -105,16 +100,17 @@ const socialPlatforms: SocialPlatform[] = [
 
 <!--Import the necessary Dropdown and Clipboard plugins-->
 <!--https://preline.co/plugins/html/dropdown.html-->
-<!--<script is:inline src="/scripts/vendor/preline/dropdown/index.js"></script>-->
+<script src="../../../../node_modules/preline/dist/preline.js"></script>
 
 <!-- https://clipboardjs.com/ -->
-<!--<script is:inline src="/scripts/vendor/clipboard.min.js"></script>-->
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
 
 <script is:inline>
 (function () {
     window.addEventListener('load', () => {
         const $clipboards = document.querySelectorAll('.js-clipboard')
         $clipboards.forEach((el) => {
+            console.log(el)
             const clipboard = new ClipboardJS(el, {
                 text: () => {
                     return window.location.href
