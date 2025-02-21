@@ -2,9 +2,13 @@
 import Icon from '@components/ui/icons/icon.astro';
 interface Props {
     likes: number
+    postId: string
 }
 
-const { likes } = Astro.props
+const {
+    likes,
+    postId,
+} = Astro.props
 
 
 ---
@@ -13,22 +17,26 @@ const { likes } = Astro.props
     type="button"
     class="focus-visible:ring-secondary group inline-flex items-center rounded-lg p-2.5 text-neutral-600 outline-none ring-zinc-500 transition duration-300 hover:bg-neutral-100 focus:outline-none focus-visible:outline-none focus-visible:ring-1 dark:text-neutral-400 dark:ring-zinc-200 dark:hover:bg-neutral-700"
     data-bookmark-button="bookmark-button"
+    data-post-id={postId}
 >
-    { likes }
+    <span id={`likes-${postId}`}>{ likes }</span>
     <Icon name="bookmark" />
 </button>
 
 <script>
 import PostRepository from "@/api/posts/PostsRepository"
-
  class Bookmark {
      private static readonly BOOKMARKS_KEY = 'bookmarks'
      private bookmarkButton: Element | null
+     private postId: string | null
+     private likesElement
 
      constructor(private dataAttrValue: string) {
          this.bookmarkButton = document.querySelector(
              `[data-bookmark-button="${dataAttrValue}"]`,
          )
+         this.postId = this.bookmarkButton?.getAttribute('data-post-id') || null;
+         this.likesElement = document.getElementById(`likes-${this.postId}`);
      }
 
      private getStoredBookmarks(): string[] {
@@ -87,20 +95,29 @@ import PostRepository from "@/api/posts/PostsRepository"
      }
 
      toggleBookmark(): void {
+        if (!this.postId) return;  // Asegurar que postId esté definido
+        if (!this.likesElement) return;  // Asegurar que postId esté definido
+
          const storedBookmarks = this.getStoredBookmarks()
          const index = storedBookmarks.indexOf(window.location.pathname)
+         let newLikes = parseInt(this.likesElement.innerText, 10)
          if (index !== -1) {
              storedBookmarks.splice(index, 1)
              this.unmarkAsStored()
+             newLikes = Math.max(0, newLikes - 1); // Evita que los likes sean negativos
+             PostRepository.likePost(this.postId, false);
          }
          else {
              storedBookmarks.push(window.location.pathname)
              this.markAsStored()
+             newLikes += 1
+             PostRepository.likePost(this.postId, true);
          }
          localStorage.setItem(
              Bookmark.BOOKMARKS_KEY,
              JSON.stringify(storedBookmarks),
          )
+         this.likesElement.innerText = newLikes.toString(); // Actualiza el número de likes
      }
  }
 

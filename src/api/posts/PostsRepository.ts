@@ -28,4 +28,17 @@ export default class PostRepository {
             return null
         }
     }
+
+    static async likePost(postId: string, state: boolean): Promise<Boolean> {
+        try {
+            const apiResponse = await SenderRequest.put<Boolean>({
+                path: '/post/like',
+                body: { postId, state }
+            })
+
+            return apiResponse.status
+        } catch (e) {
+            return false;
+        }
+    }
 }

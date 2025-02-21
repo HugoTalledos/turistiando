@@ -108,7 +108,12 @@ const ogImage = post?.images[0]
                     <section class="flex-1">
                         <div set:html={post.description} />
                     </section>
-                    <AsideInfo title={SITE.url} schedules={post.schedule} likes={post.likes || 0} />
+                    <AsideInfo
+                        postId={post.postId}
+                        title={SITE.url}
+                        schedules={post.schedule}
+                        likes={post.likes || 0}
+                    />
                 </article>
             </div>
         </div>

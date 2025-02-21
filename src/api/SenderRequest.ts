@@ -13,4 +13,10 @@ export default class SenderRequest {
             .then(getResponseData)
             .catch(escalateError)
     }
+
+    static put<T>({ path, body, config }: PostProps): Promise<APIResponse<T>> {
+        return api.put<APIResponse<T>>(path, body, config)
+            .then(getResponseData)
+            .catch(escalateError)
+    }
 }
