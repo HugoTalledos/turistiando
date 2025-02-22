@@ -8,6 +8,7 @@ export interface Page {
 export interface ContactinfoProps {
     key: string
     value: string
+    alias: string
 }
 
 export interface ScheduleProps {
