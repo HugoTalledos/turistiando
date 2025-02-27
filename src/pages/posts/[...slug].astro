@@ -122,7 +122,7 @@ const ogImage = post?.images[0]
                         <div class="flex flex-col md:flex-row w-full mt-3 items-center justify-between">
                             {
                                 post.contactInfo.map(info => (
-                                    <div class="flex items-center gap-1 dark:text-neutral-300 hover:text-orange-400">
+                                    <div class="flex items-center gap-1 dark:text-neutral-300 hover:text-orange-400 text-sm">
                                         <Icon name={info.key} />
                                         <a href={info.value} target="_blank" class="italic">{info.alias}</a>
                                     </div>

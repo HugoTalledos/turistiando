@@ -16,6 +16,8 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
         title=`Turistiando, <span class="text-yellow-500 dark:text-yellow-400">Sogamoso</span>`
         subTitle="¿Ya sabes que hacer hoy? ¿No? Bueno, esta es una guía turistica de <strong>Sogamoso</strong>."
         primaryBtn="Sorpréndeme 🍽️✨"
+        primaryBtnTooltip={true}
+        primaryBtnToolMessage="¿Te atreves a ver qué cambia mañana? 😏🔄"
         src={blogHeroImg}
         alt="Turistiando bienvenida"
     />
@@ -40,3 +42,40 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
         </div>
     </section> -->
 </BaseLayout>
+
+<script>
+import PostRepository from "@/api/posts/PostsRepository";
+
+    let slug = ""
+    const randomPost = async () => {
+        const response = await PostRepository.getRandomPost();
+        
+        return response 
+            ? `/posts/${response.slug}`
+            : '/categorias/restaurantes'
+    }
+
+    const localItem = window.localStorage.getItem("localItem");
+    const currentDate = new Date();
+    currentDate.setHours(0,0,0);
+
+    if (localItem) {
+        const lastPost = JSON.parse(localItem);
+        const lastDate = !lastPost ? new Date(lastPost.updatedAt) : new Date();
+        lastDate.setHours(0,0,0);
+        slug = lastDate < currentDate ? await randomPost() : lastPost.slug ;
+    } else {
+        slug = await randomPost();
+    }
+
+    window.localStorage.setItem(
+        "localItem",
+        JSON.stringify({
+            slug,
+            updatedAt: currentDate
+        })
+    )
+    
+    const heroSection = document.querySelector("[data-random]");
+    heroSection?.setAttribute("href", slug);
+</script>

@@ -110,7 +110,6 @@ const socialPlatforms: SocialPlatform[] = [
     window.addEventListener('load', () => {
         const $clipboards = document.querySelectorAll('.js-clipboard')
         $clipboards.forEach((el) => {
-            console.log(el)
             const clipboard = new ClipboardJS(el, {
                 text: () => {
                     return window.location.href

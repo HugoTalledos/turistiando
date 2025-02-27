@@ -41,4 +41,13 @@ export default class PostRepository {
             return false;
         }
     }
+
+    static async getRandomPost(): Promise<PostProps | null> {
+        try {
+            const apiResponse = await SenderRequest.get<PostProps>({ path: '/post/p/random' })
+            return !apiResponse.status ? null : apiResponse.data;
+        } catch(e) {
+            return null;
+        }
+    }
 }

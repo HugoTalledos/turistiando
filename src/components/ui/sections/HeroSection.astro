@@ -8,6 +8,8 @@ const {
     subTitle,
     primaryBtn,
     primaryBtnURL,
+    primaryBtnTooltip,
+    primaryBtnToolMessage,
     secondaryBtn,
     secondaryBtnURL,
     src,
@@ -19,6 +21,8 @@ interface Props {
     subTitle?: string
     primaryBtn?: string
     primaryBtnURL?: string
+    primaryBtnTooltip?: boolean
+    primaryBtnToolMessage?: string
     secondaryBtn?: string
     secondaryBtnURL?: string
     src?: any
@@ -36,7 +40,12 @@ interface Props {
         )}
 
         <div class="mt-7 grid w-full gap-3 sm:inline-flex">
-            {primaryBtn && <PrimaryCTA title={primaryBtn} url={primaryBtnURL} />}
+            {primaryBtn && <PrimaryCTA 
+                                title={primaryBtn}
+                                url={primaryBtnURL}
+                                tooltip={primaryBtnTooltip}
+                                tooltipMessage={primaryBtnToolMessage}
+                            />}
             {secondaryBtn && <SecondaryCTA title={secondaryBtn} url={secondaryBtnURL} />}
         </div>
     </div>
