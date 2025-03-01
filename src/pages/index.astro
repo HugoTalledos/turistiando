@@ -1,14 +1,9 @@
 ---
-import { getCollection } from 'astro:content'
-import type { CollectionEntry } from 'astro:content'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import HeroSection from '@components/ui/sections/HeroSection.astro'
 import FeaturesSection from '@components/ui/sections/FeaturesSection.astro'
 import blogHeroImg from '@images/home.png'
 
-const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
-    (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-).slice(0, 3);
 ---
 
 <BaseLayout title="Turistiando Sogamoso" description="¿Ya sabes que hacer hoy?">
@@ -44,38 +39,39 @@ const posts: CollectionEntry<'posts'>[] = (await getCollection('posts')).sort(
 </BaseLayout>
 
 <script>
-import PostRepository from "@/api/posts/PostsRepository";
+import PostRepository from '@/api/posts/PostsRepository'
 
-    let slug = ""
-    const randomPost = async () => {
-        const response = await PostRepository.getRandomPost();
-        
-        return response 
-            ? `/posts/${response.slug}`
-            : '/categorias/restaurantes'
-    }
+let slug = ''
+async function randomPost() {
+    const response = await PostRepository.getRandomPost()
 
-    const localItem = window.localStorage.getItem("localItem");
-    const currentDate = new Date();
-    currentDate.setHours(0,0,0);
+    return response
+        ? `/posts/${response.slug}`
+        : '/categorias/restaurantes'
+}
 
-    if (localItem) {
-        const lastPost = JSON.parse(localItem);
-        const lastDate = !lastPost ? new Date(lastPost.updatedAt) : new Date();
-        lastDate.setHours(0,0,0);
-        slug = lastDate < currentDate ? await randomPost() : lastPost.slug ;
-    } else {
-        slug = await randomPost();
-    }
+const localItem = window.localStorage.getItem('localItem')
+const currentDate = new Date()
+currentDate.setHours(0, 0, 0)
 
-    window.localStorage.setItem(
-        "localItem",
-        JSON.stringify({
-            slug,
-            updatedAt: currentDate
-        })
-    )
-    
-    const heroSection = document.querySelector("[data-random]");
-    heroSection?.setAttribute("href", slug);
+if (localItem) {
+    const lastPost = JSON.parse(localItem)
+    const lastDate = !lastPost ? new Date(lastPost.updatedAt) : new Date()
+    lastDate.setHours(0, 0, 0)
+    slug = lastDate < currentDate ? await randomPost() : lastPost.slug
+}
+else {
+    slug = await randomPost()
+}
+
+window.localStorage.setItem(
+    'localItem',
+    JSON.stringify({
+        slug,
+        updatedAt: currentDate,
+    }),
+)
+
+const heroSection = document.querySelector('[data-random]')
+heroSection?.setAttribute('href', slug)
 </script>

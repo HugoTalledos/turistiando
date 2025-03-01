@@ -7,7 +7,7 @@ export default class CategoryRepository {
             const apiResponse = await SenderRequest.get<CategoryProps[]>({ path: '/category' })
             return apiResponse.data
         }
-        catch (e) {
+        catch (_) {
             return null
         }
     }

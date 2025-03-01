@@ -1,5 +1,4 @@
 ---
-export const prerender = true;
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getCollection } from 'astro:content'
 import MainSection from '@components/ui/sections/MainSection.astro'
@@ -7,6 +6,8 @@ import { SITE } from '@/config'
 import PostRepository from '@/api/posts/PostsRepository'
 import type { PostProps } from '@/api/posts/PostProps.types'
 import BlogCard from '@/components/blog/BlogCard.astro'
+
+export const prerender = true
 
 export async function getStaticPaths() {
     const categories = await getCollection('categories')

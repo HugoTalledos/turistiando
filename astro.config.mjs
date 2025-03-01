@@ -3,12 +3,11 @@ import mdx from '@astrojs/mdx'
 import tailwind from '@astrojs/tailwind'
 import sitemap from '@astrojs/sitemap'
 import partytown from '@astrojs/partytown'
+import vercel from '@astrojs/vercel'
+import preact from '@astrojs/preact'
 import { SITE } from './src/config.ts'
 import { remarkReadingTime } from './src/support/plugins.ts'
 import { uploadAssetsToS3 } from './src/support/uploader.ts'
-import vercel from '@astrojs/vercel';
-
-import preact from '@astrojs/preact';
 
 export default defineConfig({
     site: SITE.url,

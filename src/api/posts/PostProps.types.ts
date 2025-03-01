@@ -1,5 +1,4 @@
-import type { ContactinfoProps, ScheduleProps } from "../models/Commons.types"
-
+import type { ContactinfoProps, ScheduleProps } from '../models/Commons.types'
 
 export interface PostProps {
     categoryId: string

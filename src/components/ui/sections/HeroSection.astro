@@ -40,12 +40,14 @@ interface Props {
         )}
 
         <div class="mt-7 grid w-full gap-3 sm:inline-flex">
-            {primaryBtn && <PrimaryCTA 
-                                title={primaryBtn}
-                                url={primaryBtnURL}
-                                tooltip={primaryBtnTooltip}
-                                tooltipMessage={primaryBtnToolMessage}
-                            />}
+            {primaryBtn && (
+<PrimaryCTA
+    title={primaryBtn}
+    url={primaryBtnURL}
+    tooltip={primaryBtnTooltip}
+    tooltipMessage={primaryBtnToolMessage}
+/>
+)}
             {secondaryBtn && <SecondaryCTA title={secondaryBtn} url={secondaryBtnURL} />}
         </div>
     </div>

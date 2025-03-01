@@ -7,14 +7,14 @@ interface Props {
     postId: string
     likes: number
     title: string
-    schedules: ScheduleProps[],
+    schedules: ScheduleProps[]
 }
 
 
 const { postId, likes, title, schedules } = Astro.props
 const date = new Date()
 const day = date.getDay()
-const { schedule: currentSchedule = "Cerrado" } = schedules[day - 1] || {};
+const { schedule: currentSchedule = 'Cerrado' } = schedules[day - 1] || {};
 ---
 
 <aside class="flex-none sticky top-[120px] h-full">
@@ -22,7 +22,7 @@ const { schedule: currentSchedule = "Cerrado" } = schedules[day - 1] || {};
         <summary class="dark:text-neutral-300 pb-3">{`Horario ${currentSchedule}`}</summary>
         { schedules.map(s => (
             <p class="py-3 dark:text-neutral-300 border-b border-neutral-300">{ s.day } - { s.schedule }</p>
-            
+
         )) }
     </details>
     <div class="mt-10 md:mt-10 mx-auto grid max-w-screen-lg gap-y-5 sm:flex sm:items-center sm:justify-between sm:gap-y-0">

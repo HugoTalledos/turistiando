@@ -9,7 +9,6 @@ export const SITE: Site = {
 }
 
 export const NavigationLinks: NavigationLink[] = [
-    { name: 'Noticias', url: '/posts' },
     { name: 'Lugares', url: '/categorias/lugares' },
     { name: 'Restaurantes', url: '/categorias/restaurantes' },
     { name: 'Colaboradores', url: '/colaboradores' },
@@ -74,7 +73,7 @@ export const SEO = {
     structuredData: {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        'inLanguage': 'en-US',
+        'inLanguage': 'es-MX',
         '@id': SITE.url,
         'url': SITE.url,
         'name': SITE.title,

@@ -1,24 +1,25 @@
 ---
-export const prerender = false;
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { timeago } from '@support/time'
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
 import { SITE } from '@/config'
 import { ImageGallery } from '@/components/ui/Gallery'
 import AsideInfo from '@/components/post/AsideInfo.astro'
 import PostRepository from '@/api/posts/PostsRepository'
-import type { CollectionEntry } from 'astro:content';
-import { getCollection } from 'astro:content';
-import Icon from '@/components/ui/icons/icon.astro';
+import Icon from '@/components/ui/icons/icon.astro'
 
-const { slug = '' } = Astro.params;
-const post = await PostRepository.getPostBySlug(slug);
+export const prerender = false
+
+const { slug = '' } = Astro.params
+const post = await PostRepository.getPostBySlug(slug)
 
 if (!post) {
-  return Astro.redirect('/404');
+  return Astro.redirect('/404')
 }
 
-const categories: CollectionEntry<'categories'>[] = (await getCollection('categories'));
-const category: CollectionEntry<'categories'> = categories.filter(cat => cat.data.id === post.categoryId)[0];
+const categories: CollectionEntry<'categories'>[] = (await getCollection('categories'))
+const category: CollectionEntry<'categories'> = categories.filter(cat => cat.data.id === post.categoryId)[0]
 
 const URL = Astro.url.href
 const ogImage = post?.images[0]
@@ -61,9 +62,9 @@ const ogImage = post?.images[0]
                     <ol class="flex items-center whitespace-nowrap mt-2">
                         <li class="inline-flex items-center">
                            <a
-                                class="flex items-center text-sm text-orange-400 hover:text-orange-500 focus:outline-none focus:text-orange-500"
-                                href={`/categorias/${category.slug}`}
-                            >
+                               class="flex items-center text-sm text-orange-400 hover:text-orange-500 focus:outline-none focus:text-orange-500"
+                               href={`/categorias/${category.slug}`}
+                           >
                                 {category.data.title}
                             </a>
                             <svg
@@ -111,13 +112,14 @@ const ogImage = post?.images[0]
                         <h2 class="block text-balance text-xl font-bold tracking-tight text-neutral-700 dark:text-neutral-300 md:text-2xl lg:text-3xl">
                             Mira el mapa!
                         </h2>
-                         <iframe 
-                            src={post.mapLink}
-                            class="shadow-lg rounded-md w-full h-[350px]"
-                            style="border:0;"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
+                         <iframe
+                             src={post.mapLink}
+                             class="shadow-lg rounded-md w-full h-[350px]"
+                             style="border:0;"
+                             allowfullscreen=""
+                             loading="lazy"
+                             referrerpolicy="no-referrer-when-downgrade"
+                         >
                         </iframe>
                         <div class="flex flex-col md:flex-row w-full mt-3 items-center justify-between">
                             {

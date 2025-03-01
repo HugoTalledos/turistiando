@@ -11,7 +11,7 @@ export default class PostRepository {
             })
             return apiResponse.data
         }
-        catch (e) {
+        catch (_) {
             return null
         }
     }
@@ -24,30 +24,32 @@ export default class PostRepository {
             }
             return apiResponse.data
         }
-        catch (e) {
+        catch (_) {
             return null
         }
     }
 
-    static async likePost(postId: string, state: boolean): Promise<Boolean> {
+    static async likePost(postId: string, state: boolean): Promise<boolean> {
         try {
-            const apiResponse = await SenderRequest.put<Boolean>({
+            const apiResponse = await SenderRequest.put<boolean>({
                 path: '/post/like',
-                body: { postId, state }
+                body: { postId, state },
             })
 
             return apiResponse.status
-        } catch (e) {
-            return false;
+        }
+        catch (_) {
+            return false
         }
     }
 
     static async getRandomPost(): Promise<PostProps | null> {
         try {
             const apiResponse = await SenderRequest.get<PostProps>({ path: '/post/p/random' })
-            return !apiResponse.status ? null : apiResponse.data;
-        } catch(e) {
-            return null;
+            return !apiResponse.status ? null : apiResponse.data
+        }
+        catch (_) {
+            return null
         }
     }
 }

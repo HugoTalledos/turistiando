@@ -16,6 +16,7 @@ export default antfu({
         'no-console': 'off',
         'curly': ['error', 'all'],
         'node/prefer-global/process': 'off',
+        'unused-imports/no-unused-vars': ['error', { caughtErrors: 'none' }],
     },
 
     jsonc: false,

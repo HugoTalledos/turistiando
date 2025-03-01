@@ -1,5 +1,6 @@
 ---
-import Icon from '@components/ui/icons/icon.astro';
+import Icon from '@components/ui/icons/icon.astro'
+
 interface Props {
     likes: number
     postId: string
@@ -24,102 +25,107 @@ const {
 </button>
 
 <script>
-import PostRepository from "@/api/posts/PostsRepository"
- class Bookmark {
-     private static readonly BOOKMARKS_KEY = 'bookmarks'
-     private bookmarkButton: Element | null
-     private postId: string | null
-     private likesElement
+import PostRepository from '@/api/posts/PostsRepository'
 
-     constructor(private dataAttrValue: string) {
-         this.bookmarkButton = document.querySelector(
-             `[data-bookmark-button="${dataAttrValue}"]`,
-         )
-         this.postId = this.bookmarkButton?.getAttribute('data-post-id') || null;
-         this.likesElement = document.getElementById(`likes-${this.postId}`);
-     }
+class Bookmark {
+    private static readonly BOOKMARKS_KEY = 'bookmarks'
+    private bookmarkButton: Element | null
+    private postId: string | null
+    private likesElement
 
-     private getStoredBookmarks(): string[] {
-         const item = localStorage.getItem(Bookmark.BOOKMARKS_KEY)
-         return item ? JSON.parse(item) : []
-     }
+    constructor(private dataAttrValue: string) {
+        this.bookmarkButton = document.querySelector(
+            `[data-bookmark-button="${dataAttrValue}"]`,
+        )
+        this.postId = this.bookmarkButton?.getAttribute('data-post-id') || null
+        this.likesElement = document.getElementById(`likes-${this.postId}`)
+    }
 
-     init(): void {
-         if (this.bookmarkButton && this.isStored()) {
-             this.markAsStored()
-         }
+    private getStoredBookmarks(): string[] {
+        const item = localStorage.getItem(Bookmark.BOOKMARKS_KEY)
+        return item ? JSON.parse(item) : []
+    }
 
-         this.bookmarkButton?.addEventListener('click', () =>
-             this.toggleBookmark())
-     }
+    init(): void {
+        if (this.bookmarkButton && this.isStored()) {
+            this.markAsStored()
+        }
 
-     isStored(): boolean {
-         return this.getStoredBookmarks().includes(window.location.pathname)
-     }
+        this.bookmarkButton?.addEventListener('click', () =>
+            this.toggleBookmark())
+    }
 
-     markAsStored(): void {
-         if (this.bookmarkButton) {
-             this.bookmarkButton.classList.add('bookmarked')
-             const svgElement = this.bookmarkButton.querySelector('svg')
-             if (svgElement) {
-                 svgElement.setAttribute(
-                     'class',
-                     'h-6 w-6 fill-red-500 dark:fill-red-500',
-                 )
-             }
-             const pathElement = svgElement?.querySelector('path')
-             if (pathElement) {
-                 pathElement.setAttribute(
-                     'class',
-                     'fill-current text-red-500 dark:text-red-500',
-                 )
-             }
-         }
-     }
+    isStored(): boolean {
+        return this.getStoredBookmarks().includes(window.location.pathname)
+    }
 
-     unmarkAsStored(): void {
-         if (this.bookmarkButton) {
-             this.bookmarkButton.classList.remove('bookmarked')
-             const svgElement = this.bookmarkButton.querySelector('svg')
-             if (svgElement) {
-                 svgElement.setAttribute('class', 'h-6 w-6 fill-none')
-             }
-             const pathElement = svgElement?.querySelector('path')
-             if (pathElement) {
-                 pathElement.setAttribute(
-                     'class',
-                     'fill-current text-neutral-500 group-hover:text-red-400 dark:text-neutral-500 group-hover:dark:text-red-400',
-                 )
-             }
-         }
-     }
+    markAsStored(): void {
+        if (this.bookmarkButton) {
+            this.bookmarkButton.classList.add('bookmarked')
+            const svgElement = this.bookmarkButton.querySelector('svg')
+            if (svgElement) {
+                svgElement.setAttribute(
+                    'class',
+                    'h-6 w-6 fill-red-500 dark:fill-red-500',
+                )
+            }
+            const pathElement = svgElement?.querySelector('path')
+            if (pathElement) {
+                pathElement.setAttribute(
+                    'class',
+                    'fill-current text-red-500 dark:text-red-500',
+                )
+            }
+        }
+    }
 
-     toggleBookmark(): void {
-        if (!this.postId) return;  // Asegurar que postId esté definido
-        if (!this.likesElement) return;  // Asegurar que postId esté definido
+    unmarkAsStored(): void {
+        if (this.bookmarkButton) {
+            this.bookmarkButton.classList.remove('bookmarked')
+            const svgElement = this.bookmarkButton.querySelector('svg')
+            if (svgElement) {
+                svgElement.setAttribute('class', 'h-6 w-6 fill-none')
+            }
+            const pathElement = svgElement?.querySelector('path')
+            if (pathElement) {
+                pathElement.setAttribute(
+                    'class',
+                    'fill-current text-neutral-500 group-hover:text-red-400 dark:text-neutral-500 group-hover:dark:text-red-400',
+                )
+            }
+        }
+    }
 
-         const storedBookmarks = this.getStoredBookmarks()
-         const index = storedBookmarks.indexOf(window.location.pathname)
-         let newLikes = parseInt(this.likesElement.innerText, 10)
-         if (index !== -1) {
-             storedBookmarks.splice(index, 1)
-             this.unmarkAsStored()
-             newLikes = Math.max(0, newLikes - 1); // Evita que los likes sean negativos
-             PostRepository.likePost(this.postId, false);
-         }
-         else {
-             storedBookmarks.push(window.location.pathname)
-             this.markAsStored()
-             newLikes += 1
-             PostRepository.likePost(this.postId, true);
-         }
-         localStorage.setItem(
-             Bookmark.BOOKMARKS_KEY,
-             JSON.stringify(storedBookmarks),
-         )
-         this.likesElement.innerText = newLikes.toString(); // Actualiza el número de likes
-     }
- }
+    toggleBookmark(): void {
+        if (!this.postId) {
+            return
+        } // Asegurar que postId esté definido
+        if (!this.likesElement) {
+            return
+        } // Asegurar que postId esté definido
 
- new Bookmark('bookmark-button').init()
+        const storedBookmarks = this.getStoredBookmarks()
+        const index = storedBookmarks.indexOf(window.location.pathname)
+        let newLikes = Number.parseInt(this.likesElement.innerText, 10)
+        if (index !== -1) {
+            storedBookmarks.splice(index, 1)
+            this.unmarkAsStored()
+            newLikes = Math.max(0, newLikes - 1) // Evita que los likes sean negativos
+            PostRepository.likePost(this.postId, false)
+        }
+        else {
+            storedBookmarks.push(window.location.pathname)
+            this.markAsStored()
+            newLikes += 1
+            PostRepository.likePost(this.postId, true)
+        }
+        localStorage.setItem(
+            Bookmark.BOOKMARKS_KEY,
+            JSON.stringify(storedBookmarks),
+        )
+        this.likesElement.innerText = newLikes.toString() // Actualiza el número de likes
+    }
+}
+
+new Bookmark('bookmark-button').init()
 </script>
