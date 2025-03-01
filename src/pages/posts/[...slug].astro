@@ -8,6 +8,7 @@ import { ImageGallery } from '@/components/ui/Gallery'
 import AsideInfo from '@/components/post/AsideInfo.astro'
 import PostRepository from '@/api/posts/PostsRepository'
 import Icon from '@/components/ui/icons/icon.astro'
+import FloatingButton from '@/components/post/FloatingButton';
 
 export const prerender = false
 
@@ -94,7 +95,7 @@ const ogImage = post?.images[0]
                             </svg>
                         </li>
                         <li
-                            class="inline-flex items-center text-sm hover:text-neutral-600 focus:outline-none focus:text-neutral-600 dark:hover:text-neutral-400"
+                            class="inline-flex items-center text-sm hover:text-neutral-600 focus:outline-none focus:text-neutral-600 dark:hover:text-neutral-400 dark:text-neutral-300"
                             aria-current="page"
                         >
                             📍
@@ -143,6 +144,12 @@ const ogImage = post?.images[0]
                 </article>
             </div>
         </div>
+        <FloatingButton
+            label={post.isOpen ? "Abierto" : "Cerrado"}
+            icon={post.isOpen ? "🟢" : "🔴"}
+            schedules={post.schedule}
+            client:visible
+        />
     </section>
     <style is:inline>
         html.dark .astro-code,
