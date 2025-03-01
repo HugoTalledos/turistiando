@@ -25,7 +25,7 @@ const FloatingButton = ({ label = "Horarios", icon = "🗓️", schedules }) => 
     </div>
     <button
       onClick={handleClick}
-      className="fixed bottom-4 left-4 flex items-center gap-2 bg-blue-600 text-black px-4 py-2 rounded-full shadow-lg bg-white"
+      className="md:invisible fixed bottom-4 left-4 flex items-center gap-2 bg-blue-600 text-black px-4 py-2 rounded-full shadow-lg bg-white"
     >
       <span>
         {icon}
