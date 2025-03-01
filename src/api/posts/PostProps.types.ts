@@ -14,6 +14,7 @@ export interface PostProps {
     schedule: Array<ScheduleProps>
     slug: string
     title: string
+    place: string
     isOpen: boolean
 }
 

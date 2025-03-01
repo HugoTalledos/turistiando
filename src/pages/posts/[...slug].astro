@@ -97,16 +97,17 @@ const ogImage = post?.images[0]
                             class="inline-flex items-center text-sm hover:text-neutral-600 focus:outline-none focus:text-neutral-600 dark:hover:text-neutral-400"
                             aria-current="page"
                         >
+                            📍
                             {
-                                post.isOpen
-                                ? <span class="text-green-300 font-bold">Abierto</span>
-                                : <span class="text-red-500 font-bold">Cerrado</span>
+                                post.place
+                                ? post.place
+                                : "Sogamoso"
                             }
                         </li>
                     </ol>
                 </div>
 
-                <article class="flex gap-[20px] md:gap-[50px] flex-col md:flex-row h-full">
+                <article class="flex gap-[20px] md:gap-[80px] flex-col md:flex-row h-full">
                     <section class="flex-1 flex flex-col gap-[15px]">
                         <div class="dark:text-neutral-300" set:html={post.description} />
                         <h2 class="block text-balance text-xl font-bold tracking-tight text-neutral-700 dark:text-neutral-300 md:text-2xl lg:text-3xl">
@@ -136,6 +137,7 @@ const ogImage = post?.images[0]
                         postId={post.postId}
                         title={SITE.title}
                         schedules={post.schedule}
+                        isOpen={post.isOpen}
                         likes={post.likes || 0}
                     />
                 </article>
