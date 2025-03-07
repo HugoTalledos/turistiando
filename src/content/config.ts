@@ -1,20 +1,5 @@
 import { defineCollection, z } from 'astro:content'
 
-const products = defineCollection({
-    type: 'data',
-    schema: z.object({
-        creationDate: z.string(),
-        isDeleted: z.boolean(),
-        lastModify: z.string(),
-        productCategory: z.string(),
-        productDescription: z.string(),
-        productId: z.string(),
-        productImage: z.array(z.string().url()),
-        productName: z.string(),
-        productOrder: z.number(),
-    }),
-})
-
 const posts = defineCollection({
     type: 'content',
     schema: ({ image }) => z.object({
@@ -70,4 +55,4 @@ const friendsCollection = defineCollection({
     ),
 })
 
-export const collections = { posts, categories: categoryCollection, friends: friendsCollection, products }
+export const collections = { posts, categories: categoryCollection, friends: friendsCollection }

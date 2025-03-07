@@ -52,13 +52,13 @@ interface Props {
         </div>
     </div>
 
-    <div class="w-full hidden md:block">
-        <div class="top-12 overflow-hidden w-full md:ml-4 flex justify-center">
+    <div class="w-full hidden md:block md:h-[250px]">
+        <div class="top-12 overflow-hidden w-full h-full md:ml-4 flex justify-center">
             {src && alt && (
                 <Image
                     src={src}
                     alt={alt}
-                    class="h-full w-[320px] scale-100 object-cover object-center"
+                    class="h-full w-full scale-100 object-cover object-center rounded-full"
                     draggable="false"
                     loading="eager"
                     format="avif"
